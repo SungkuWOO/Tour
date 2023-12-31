@@ -1,6 +1,8 @@
 
 import streamlit as st
-from openai import OpenAI
+from openai import openai
+#from openai import OpenAI
+
 
 st.markdown("<h1 style='text-align: left;'><b>AI_여행가이드</b></h1>", unsafe_allow_html=True)
 #st.title(" AI_여행가이드")
