@@ -8,7 +8,7 @@ import os
 st.markdown("<h1 style='text-align: left;'><b>AI_여행가이드</b></h1>", unsafe_allow_html=True)
 #st.title(" AI_여행가이드")
 #st.markdown("❤ 여행 가슴 설레고 너무나 멋지지 않나요 ❤")
-st.markdown("<h4 style='text-align: left;'><i><font color=yellow>🗽🏰 글쎄, AI가 여행 스케줄을 잡아 주네요 🗼💒</font></i></h4>", unsafe_allow_html=True)
+st.markdown("<h4 style='text-align: left;'><i><font color=brown>🗽🏰 글쎄, AI가 여행 스케줄을 잡아 주네요 🗼💒</font></i></h4>", unsafe_allow_html=True)
 
 client = OpenAI(api_key=st.secrets["OPENAI_API_KEY"])
 
@@ -42,6 +42,7 @@ def generate_prompt(여행지역, 여행형태, 여행일수, max_line, keywords
     세부일정이 꼭 필요합니다.
     "일자별 세부일정"을 잡아서 반드시 일자별로 다음 줄부터 꼭 이모지를 넣어서 보기좋게 작성해 주세요.
     마지막으로 정확한 여행경비도 알려주세요(왕복항공료도 포함해 주세요)   
+    해외 여행지의 경우 여행지의 url을 나타내면 금상첨화(해당사항이 없으면 표시하지 말것)
     ---
     여행지역: {여행지역}
     여행형태: {여행형태}
@@ -97,7 +98,7 @@ if start_date <= end_date:
 else:
     st.error("종료일이 시작일 보다 빠르군요! 다시 선택해 주세요.")
 
-auto_complete = st.toggle(label="7. 여행 키워드 3개이내 작성. 예: 유적지, 바다, 열대과일, 만년설 등등")
+auto_complete = st.toggle(label="예시확인버튼 🌐키워드 입력은 선택사항 입니다. 예: 특정국가, 유적지, 바다 등")
 with st.form("form"):
     col1, col2, col3 = st.columns(3)
     with col1:
@@ -136,17 +137,17 @@ with st.form("form"):
     if keywords == '' or keywords == " ":
         st.write("1개 이상 키워드 입력을 추천 합니다!!")
 
-    submitted = st.form_submit_button("입력 완료후 엔터 확인")
+    submitted = st.form_submit_button("입력한 여행 키워드 확인(엔터)")
     if submitted:
         st.write('키워드: ' + ', '.join(keywords[:3]))
        #st.write('키워드:', keywords[0],',',keywords[1],',',keywords[2])
-    st.write("✳✳✳✳✳✳✳❇❇❇❇❇❇❇❇❇✳✳✳✳✳✳✳❇❇❇❇❇❇❇❇❇✳✳✳✳✳✳✳❇❇❇❇❇❇❇❇")
+    st.write("✳✳✳✳✳✳✳❇❇❇❇❇❇❇❇")
 
 # 입력받은 데이터 확인
-if st.button('👌여행 계획 확인하기'):
+if st.button('👌여기를 꾹 눌러서 여행 계획서를 확인 합시다'):
     st.write('여행지역:', 여행지역)
     st.write('여행형태:' + ', '.join(여행형태[:2]))
-    st.write('여행일수:', 여행일수, '일  ', '🟧🟨🟩🟦🟫🔷🔹🔸 결과를 보자◽▪▫▫▫ ')
+    st.write('여행일수:', 여행일수, '일  ', '🟧🟨🟩🟦🟫🔷🔹🔸 아래를 확인해 보세요◽▪▫▫▫ ')
 
 
     prompt = generate_prompt(
@@ -158,3 +159,5 @@ if st.button('👌여행 계획 확인하기'):
     )
     response = request_chat_completion(prompt)
     print_streaming_response(response)
+    st.write("✳✳✳✳✳✳✳❇❇❇❇❇❇❇❇")
+    st.write("🧡💛💚여행계획서가 마음에 드셨나요?")
