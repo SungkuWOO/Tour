@@ -4,11 +4,10 @@ import streamlit as st
 from openai import OpenAI
 import os
 
-
 st.markdown("<h1 style='text-align: left;'><b>AI_여행가이드</b></h1>", unsafe_allow_html=True)
 #st.title(" AI_여행가이드")
 #st.markdown("❤ 여행 가슴 설레고 너무나 멋지지 않나요 ❤")
-st.markdown("<h4 style='text-align: left;'><i><font color=brown>🗽🏰 글쎄, AI가 여행 스케줄을 잡아 주네요 🗼💒</font></i></h4>", unsafe_allow_html=True)
+st.markdown("<h4 style='text-align: left;'><i><font color=brown>🗽🏰 앗싸, AI가 여행 스케줄까지 💒🗽</font></i></h4>", unsafe_allow_html=True)
 
 client = OpenAI(api_key=st.secrets["OPENAI_API_KEY"])
 
@@ -42,7 +41,7 @@ def generate_prompt(여행지역, 여행형태, 여행일수, max_line, keywords
     세부일정이 꼭 필요합니다.
     "일자별 세부일정"을 잡아서 반드시 일자별로 다음 줄부터 꼭 이모지를 넣어서 보기좋게 작성해 주세요.
     마지막으로 정확한 여행경비도 알려주세요(왕복항공료도 포함해 주세요)   
-    해외 여행지의 경우 여행지의 url을 나타내면 금상첨화(해당사항이 없으면 표시하지 말것)
+    해외 여행지역의 경우 여행지역의 이미지에 대한 url을 나타내면 금상첨화(해당사항이 없으면 표시하지 말것)
     ---
     여행지역: {여행지역}
     여행형태: {여행형태}
@@ -63,13 +62,13 @@ st.markdown(
 )
 
 # 사용자에게 입력받을 여행 정보
-여행지_옵션 = ['동남아','서남아','동유럽','서유럽','북유럽','북미','남미','국내여행','지중해','아프리카','남태평양','남극', '북극','달나라']
+여행지_옵션 = ['동남아','서남아','동유럽','서유럽','북유럽','북미','남미','국내여행','지중해','아프리카','남태평양','남극','달나라']
 여행지역 = st.radio('🚋 여행 희망지역을 선택하세요.', 여행지_옵션)
 
 # st.columns를 사용해 가로로 체크박스 배치
 
 여행형태=[]
-여행형태_1 = st.radio('🚋 여행의 유형을 선택 하세요.', ('자유여행', '패키지여행', '신혼여행','효도여행'))
+여행형태_1 = st.radio('🚋 여행의 유형을 선택 하세요.', ('자유여행', '패키지', '신혼','효도'))
 
 st.write(" ")
 여행형태_2 = st.radio('🚋 누구랑 여행 가세요?', ('나홀로', '친구', '가족', '애인'))
@@ -141,10 +140,10 @@ with st.form("form"):
     if submitted:
         st.write('키워드: ' + ', '.join(keywords[:3]))
        #st.write('키워드:', keywords[0],',',keywords[1],',',keywords[2])
-    st.write("✳✳✳✳✳✳✳❇❇❇❇❇❇❇❇")
+    #st.write("✳✳✳✳✳✳✳✳✳✳✳✳✳✳✳")
 
 # 입력받은 데이터 확인
-if st.button('👌여기를 꾹 눌러서 여행 계획서를 확인 합시다'):
+if st.button('👌여기를 꾹 눌러서 여행 계획서를 확인 하세요'):
     st.write('여행지역:', 여행지역)
     st.write('여행형태:' + ', '.join(여행형태[:2]))
     st.write('여행일수:', 여행일수, '일  ', '🟧🟨🟩🟦🟫🔷🔹🔸 아래를 확인해 보세요◽▪▫▫▫ ')
@@ -159,5 +158,5 @@ if st.button('👌여기를 꾹 눌러서 여행 계획서를 확인 합시다')
     )
     response = request_chat_completion(prompt)
     print_streaming_response(response)
-    st.write("✳✳✳✳✳✳✳❇❇❇❇❇❇❇❇")
+    st.write("🟧🟨🟩🟦🟫🟧🟨🟩🟦🟫")
     st.write("🧡💛💚여행계획서가 마음에 드셨나요?")
