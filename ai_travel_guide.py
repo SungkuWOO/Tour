@@ -10,7 +10,7 @@ st.markdown("<h1 style='text-align: left;'><b>AI_여행가이드</b></h1>", unsa
 st.markdown("<h4 style='text-align: left;'><i><font color=brown>🗽🏰 앗싸, AI가 여행 스케줄까지 💒🗽</font></i></h4>", unsafe_allow_html=True)
 
 client = OpenAI(api_key=st.secrets["OPENAI_API_KEY"])
-st.image("./data/tour.png", width=450)
+st.image("C:/Users/PC2307/PycharmProjects/pythonProject1/ai_tour/data/tour.png", width=450)
 #client = OpenAI(api_key=st.secrets["api_key"])
 def request_chat_completion(prompt):
     response = client.chat.completions.create(
